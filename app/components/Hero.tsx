@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Users, Server, ShoppingCart, Terminal } from "lucide-react";
+import { motion } from "framer-motion";
 import Icon from "./Icon";
+import NumberTicker from "./NumberTicker";
 
 export default function Hero() {
   return (
@@ -9,7 +13,12 @@ export default function Hero() {
       <div className="general-background relative mx-auto flex size-full max-w-[100rem] flex-col justify-center overflow-hidden rounded-2xl">
         <div className="grid gap-16 pb-56 md:pb-96 xl:grid-cols-3 xl:pb-64">
           <div className="flex flex-col items-center justify-center gap-12 p-12 text-center sm:p-20 lg:col-span-2 xl:items-start xl:justify-start xl:text-left">
-            <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left gap-2">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left gap-2"
+            >
               <h1 className="text-3xl text-white sm:text-4xl lg:text-5xl font-semibold">
                 Modern hosting for
               </h1>
@@ -18,10 +27,21 @@ export default function Hero() {
                   <h2 className="general-text text-3xl sm:text-4xl lg:text-5xl font-semibold">
                     virtual servers
                   </h2>
-                  <Icon icon={Terminal} className="hidden size-10 text-[#FF689EB8] md:flex" />
+                  <motion.div
+                    initial={{ scale: 0, rotate: -45 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 10 }}
+                  >
+                    <Icon icon={Terminal} className="hidden size-10 text-[#FF689EB8] md:flex" />
+                  </motion.div>
                 </div>
               </div>
-              <div className="mt-8 flex justify-center xl:justify-start">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="mt-8 flex justify-center xl:justify-start"
+              >
                 <Link
                   href="/me/buy"
                   className="group bg-gradient-to-r from-[#3201133f] to-[#3f00197b] smooth flex rounded-full px-8 py-4 outline outline-1 outline-offset-[-1px] outline-white/5 hover:scale-[96%] hover:outline-[#FF86AB]/30 hover:shadow-[0_0_30px_rgba(255,134,171,0.15)]"
@@ -31,12 +51,17 @@ export default function Hero() {
                     <span className="text-white font-medium">Order a server</span>
                   </div>
                 </Link>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
-        <div className="absolute right-20 top-8 z-[3] hidden xl:flex">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="absolute right-20 top-8 z-[3] hidden xl:flex"
+        >
           <div className="flex items-center gap-8">
             <Image
               src="/icons/arrow.svg"
@@ -49,7 +74,7 @@ export default function Hero() {
               best <br /> support
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <div className="z-[3] h-px w-full bg-white/5" />
 
@@ -57,7 +82,9 @@ export default function Hero() {
           <div className="flex gap-6 items-center">
             <Icon icon={Users} className="size-7 text-white" />
             <div className="flex flex-col justify-start">
-              <p className="text-white text-3xl font-semibold">0.0k+</p>
+              <p className="text-white text-3xl font-semibold flex items-center">
+                <NumberTicker value={14.2} />k+
+              </p>
               <p className="text-white/50 text-sm">active users</p>
             </div>
           </div>
@@ -65,7 +92,9 @@ export default function Hero() {
           <div className="flex gap-6 items-center">
             <Icon icon={Server} className="size-7 text-white" />
             <div className="flex flex-col justify-start">
-              <p className="text-white text-3xl font-semibold">0.0k+</p>
+              <p className="text-white text-3xl font-semibold flex items-center">
+                <NumberTicker value={5.8} />k+
+              </p>
               <p className="text-white/50 text-sm">active servers</p>
             </div>
           </div>
@@ -73,14 +102,21 @@ export default function Hero() {
           <div className="flex gap-6 items-center">
             <Icon icon={ShoppingCart} className="size-7 text-white" />
             <div className="flex flex-col justify-start">
-              <p className="text-white text-3xl font-semibold">0.0k+</p>
+              <p className="text-white text-3xl font-semibold flex items-center">
+                <NumberTicker value={24.5} />k+
+              </p>
               <p className="text-white/50 text-sm">paid servers</p>
             </div>
           </div>
         </div>
 
         <div className="relative">
-          <div className="absolute -right-24 bottom-0 z-[2] w-[800px] lg:right-28 xl:right-0">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="absolute -right-24 bottom-0 z-[2] w-[800px] lg:right-28 xl:right-0"
+          >
             <div className="relative">
               <Image
                 src="/land/general.png"
@@ -90,7 +126,12 @@ export default function Hero() {
                 className="h-auto w-full"
                 priority
               />
-              <div className="absolute bottom-40 left-[-350px] z-[5] hidden xl:flex">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, duration: 0.8 }}
+                className="absolute bottom-40 left-[-350px] z-[5] hidden xl:flex"
+              >
                 <div className="flex items-center gap-8">
                   <Image
                     src="/icons/arrow-left.svg"
@@ -103,10 +144,15 @@ export default function Hero() {
                     fast <br /> hardware
                   </p>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
-          <div className="absolute bottom-0 right-[550px] z-[2] w-[800px]">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="absolute bottom-0 right-[550px] z-[2] w-[800px]"
+          >
             <Image
               src="/land/slight-general.png"
               alt="Server illustration"
@@ -115,7 +161,7 @@ export default function Hero() {
               className="h-auto w-full"
               priority
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

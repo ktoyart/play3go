@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowRight, ShieldCheck, Rocket, Clock, Cpu, LayoutDashboard, Headphones } from "lucide-react";
+import { motion } from "framer-motion";
 import Icon from "./Icon";
 
 const advantages = [
@@ -44,11 +47,36 @@ const advantages = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
 export default function Advantages() {
   return (
     <section className="w-full px-4 lg:px-16">
       <div className="mx-auto flex size-full max-w-[100rem] flex-col justify-center">
-        <div className="flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center"
+        >
           <div className="relative">
             <h2 className="relative z-10 text-3xl font-semibold text-white lg:text-5xl">
               Our advantages
@@ -57,18 +85,31 @@ export default function Advantages() {
               <div className="z-0 h-5 w-full bg-gradient-to-r from-[#B6004C] to-[#590000] lg:h-7" />
             </div>
           </div>
-        </div>
-        <div className="flex justify-center pt-8">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex justify-center pt-8"
+        >
           <p className="max-w-lg text-center text-lg text-white/50">
             Our main advantages and why you should choose us.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 pt-10 lg:grid-cols-6 xl:grid-cols-9">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid gap-4 pt-10 lg:grid-cols-6 xl:grid-cols-9"
+        >
           {advantages.map((item, index) => {
             const IconComp = item.icon;
             return (
-              <div
+              <motion.div
+                variants={itemVariants}
                 key={index}
                 className={`${
                   index === 0 || index === 3
@@ -95,10 +136,10 @@ export default function Advantages() {
                     <span className="text-white group-hover:text-[#FF86AB] transition-colors">find more</span>
                   </button>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

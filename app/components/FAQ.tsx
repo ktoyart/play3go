@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Icon from "./Icon";
 
 const faqs = [
@@ -36,9 +37,15 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="w-full px-4 lg:px-16">
+    <section className="w-full px-4 lg:px-16 pb-20">
       <div className="mx-auto max-w-[100rem]">
-        <div className="flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center"
+        >
           <div className="relative">
             <h2 className="relative z-10 text-3xl font-semibold text-white lg:text-5xl">
               FAQ
@@ -47,18 +54,28 @@ export default function FAQ() {
               <div className="z-0 h-5 w-full bg-gradient-to-r from-[#B6004C] to-[#590000] lg:h-7" />
             </div>
           </div>
-        </div>
-        <div className="flex justify-center pt-8">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex justify-center pt-8"
+        >
           <p className="max-w-lg text-center text-lg text-white/50">
             Frequently asked questions about our hosting services.
           </p>
-        </div>
+        </motion.div>
 
         <div className="max-w-3xl mx-auto flex flex-col gap-3 pt-10">
           {faqs.map((faq, index) => {
             const isOpen = open === index;
             return (
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 key={index}
                 className="rounded-[12px] outline outline-offset-[-1px] outline-white/5 bg-white/[2%] overflow-hidden"
               >
@@ -75,12 +92,22 @@ export default function FAQ() {
                     )}
                   </span>
                 </button>
-                {isOpen && (
-                  <div className="px-5 pb-5 text-white/50 leading-relaxed animate-slide-down">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 text-white/50 leading-relaxed">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>
